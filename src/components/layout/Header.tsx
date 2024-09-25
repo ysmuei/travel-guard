@@ -7,14 +7,19 @@ const headerStyle = css`
   align-items: center;
   background-color: #0a033a;
   padding: 30px 20px;
-  position: relative; /* position을 relative로 설정 */
+  position: absolute; /* position을 relative로 설정 */
+  top: 0;
+  width: 100%;
+  z-index: 100; /* footer 위에 */
 `;
 
 const logoStyle = css`
   width: 220px;
+  padding: 20px;
   display: flex;
   position: absolute; /* 로고를 절대 위치로 설정 */
   left: 40px; /* 왼쪽 여백 */
+  cursor: pointer;
 `;
 const logoImg = css`
   width: 100%;
@@ -38,7 +43,9 @@ const Header = () => {
   return (
     <header css={headerStyle}>
       <div css={logoStyle}>
-        <img css={logoImg} src="/assets/logo.svg" alt="logo" />
+        <Link to="/">
+          <img css={logoImg} src="/assets/logo.svg" alt="logo" />
+        </Link>
       </div>
       <nav css={navStyle}>
         <Link to="/main" css={fontStyle}>

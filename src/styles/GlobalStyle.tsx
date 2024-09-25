@@ -8,6 +8,8 @@ export const globalStyles = css`
     padding: 0;
     background-color: #f0f0f0; /* 배경색 */
 
+    overflow: hidden;
+
     color: #f0f0f0;
     font-family: "Pretendard Variable", sans-serif;
     font-size: 20px;

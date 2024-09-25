@@ -44,7 +44,13 @@ const BannerPage: React.FC = () => {
   colorScale.domain([0, maxVal]);
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div
+      style={{
+        width: "1200px",
+        height: `calc(100vh - 200px)`,
+        position: "absolute",
+      }}
+    >
       <Globe
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
