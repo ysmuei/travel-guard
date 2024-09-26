@@ -6,7 +6,7 @@ export const globalStyles = css`
   body {
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* 배경색 */
+    background-color: #020010; /* 배경색 */
 
     overflow: hidden;
 
