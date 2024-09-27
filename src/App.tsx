@@ -4,7 +4,8 @@ import Footer from "./components/layout/Footer";
 import BannerPage from "./components/pages/BannerPage";
 import EmbassyPage from "./components/pages/EmbassyPage";
 import MainPage from "./components/pages/MainPage";
-import PermissonEnter from "./components/pages/PermissonEnter";
+import PermissonPage from "./components/pages/PermissonPage";
+import DetailPage from "./components/pages/DetailPage";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<BannerPage />} />
         <Route path="/main" element={<MainPage />} />
-        <Route path="/permission" element={<PermissonEnter />} />
+        <Route path="/details/:countryCode" element={<DetailPage />} />
+        <Route path="/permission" element={<PermissonPage />} />
         <Route path="/embassy" element={<EmbassyPage />} />
       </Routes>
       <Footer />

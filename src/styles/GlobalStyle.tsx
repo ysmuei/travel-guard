@@ -9,7 +9,7 @@ export const globalStyles = css`
     background-color: #020010; /* 배경색 */
 
     overflow: hidden;
-
+    box-sizing: border-box;
     color: #f0f0f0;
     font-family: "Pretendard Variable", sans-serif;
     font-size: 20px;

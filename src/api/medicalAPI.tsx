@@ -1,4 +1,3 @@
-// src/api/medicalApi.ts
 import axios from "axios";
 const apyKey = import.meta.env.VITE_MEDICAL_API_KEY
 

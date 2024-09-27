@@ -41,7 +41,7 @@ const Footer = () => {
     <div css={footerStyle}>
       <div css={keyframes} />
       <div css={logoContainerStyle}>
-        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.png" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />

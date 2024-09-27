@@ -21,7 +21,7 @@ const EmbassyPage = () => {
       국가/지역별 대사관 정보를 제공합니다.
       </p>
       {/* Input 컴포넌트에 handleInputChange 전달 */}
-      <Input onInputChange={handleInputChange} />
+      <Input value={searchQuery} onInputChange={handleInputChange} />
       {/* API 호출 및 데이터 표시 */}
       {/* 예시: <SearchResults query={searchQuery} /> */}
     </div>
