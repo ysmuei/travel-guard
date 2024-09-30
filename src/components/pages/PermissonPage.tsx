@@ -54,7 +54,7 @@ const PermissonPage = () => {
       <Input value={searchQuery} onInputChange={handleInputChange} />
       <div css={listConStyle}>
         <div css={listHeaderStyle}>
-          <p css={css({ flex: 2.1 })}>국가</p>
+          <p css={css({ flex: 2.2 })}>국가</p>
           <p css={css({ flex: 3 })}>입국가능기간</p>
           <p css={css({ flex: 1.1 })}>입국가능여부</p>
           <p css={css({ flex: 1.4 })}>입국시 소지여부</p>
