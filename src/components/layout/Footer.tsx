@@ -32,7 +32,7 @@ const Footer = () => {
         transform: translateX(0);
       }
       100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
       }
     }
   `;
@@ -41,7 +41,13 @@ const Footer = () => {
     <div css={footerStyle}>
       <div css={keyframes} />
       <div css={logoContainerStyle}>
-        <img css={logoStyle} src="./assets/footerLogo.png" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />

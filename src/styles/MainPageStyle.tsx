@@ -7,7 +7,7 @@ export const TabContainer = css`
   display: flex; // Flexbox를 사용하여 탭을 수평으로 정렬
   padding: 10px 0px; // 위아래, 좌우 패딩
   border-radius: 8px;
-  gap: 3px; // 탭 간 간격
+  gap: 5px; // 탭 간 간격
 `;
 
 // 각 탭 스타일
@@ -42,8 +42,9 @@ export const StatusBox = css`
 export const UlStyle = css`
   width: 100%;
   height: 60%;
-  padding: 10px 0;
-  border: 1px solid white;
+  padding: 0px 30px;
+  box-sizing: border-box;
+  border: 1px solid #7FA9FF60;
   border-radius: 8px;
   background: rgb(127,169,255);
   background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
@@ -77,13 +78,12 @@ export const UlStyle = css`
 export const LiStyle = css`
   width: 17%; // 6개 항목을 가로로 배치할 수 있는 너비
   min-width: 100px; // 최소 너비 설정
-  height: 18%; // 고정 높이
+  height: 17%; // 고정 높이
   display: flex;
   align-items: center;
   padding: 10px;
   color: white; // 글자 색상
   transition: background 0.3s ease; // 배경 색상 변화
-  border: 1px solid rgba(255, 255, 255, 0.2); // 테두리
 `;
 
 export const linkStyle = css`

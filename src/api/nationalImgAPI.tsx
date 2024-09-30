@@ -9,7 +9,7 @@ export const fetchNationalData = async (ISO: string) => {
     const response = await axios.get(`${BASE_URL}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching medical data:", error);
+    console.error("Error fetchNationalData:", error);
     throw error;
   }
 };

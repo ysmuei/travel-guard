@@ -73,7 +73,7 @@ const MainPage = () => {
             onClick={() => handleTabClick(label)}
           >
             {label !== "전체" && <div css={StatusBox} style={{ backgroundColor: getStatusColor(label) }} />}
-            <span style={{ color: '#F0F0F0', fontSize: 12, fontFamily: 'Pretendard Variable', fontWeight: '600' }}>
+            <span style={{ color: '#F0F0F0', fontSize: 16, fontFamily: 'Pretendard Variable', fontWeight: '600' }}>
               {text}
             </span>
           </div>

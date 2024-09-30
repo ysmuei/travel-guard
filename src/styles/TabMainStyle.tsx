@@ -4,7 +4,6 @@ import { css } from "@emotion/react";
 export const mainStyle = css`
     height: 70%;
     width: 80%;
-    border: 1px solid red;
     color: #f0f0f0;
     position: absolute;
     top: 150px;

@@ -4,8 +4,10 @@ import { css } from "@emotion/react";
 export const detailCon = css`
   width: 100%;
   height: 100%;
-  border: 1px solid blue;
+  margin-top: 30px;
   overflow-y: scroll;
+  box-sizing: border-box;
+
   /* 커스텀 스크롤바 */
   &::-webkit-scrollbar {
     width: 10px;
@@ -26,45 +28,71 @@ export const detailCon = css`
 
 export const contriesName = css`
   width: 100%;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   height: 180px;
-  padding: 32px;
-  border: 1px solid white;
+  padding: 0 32px;
+  border-radius: 8px;
+  border: 1px solid #7FA9FF60;
+  gap: 20px;
+  margin-bottom: 32px;
+  background: rgb(127,169,255);
+    background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
 `;
 
 export const detailInfo = css`
   display: flex;
   width: 100%;
-  height: 70%;
+  gap: 20px;
   box-sizing: border-box;
-  border: 1px solid yellow;
+  height: 90%;
 `;
 
 export const localImg = css`
   width: 50%;
-  aspect-ratio: 1; 
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #7FA9FF60;
   background-sizing: contain; 
-  border: 2px solid green;
 `;
 
 export const textContainer = css`
   display: flex;
   flex-direction: column; /* 위아래로 배치 */
+  gap: 20px;
   width: 50%;
   height: 100%; /* 부모의 전체 높이를 차지 */
 `;
 
-export const halfCon = css`
+export const newsCon = css`
   flex: 1; /* 50% 높이로 설정 */
-  border: 1px solid red; 
+  border: 1px solid #7FA9FF60;
   display: flex;
   align-items: center;
+  border-radius: 8px;
   justify-content: center;
+  background: rgb(127,169,255);
+  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
+`;
+export const embassyCon = css`
+  flex: 1; /* 50% 높이로 설정 */
+  border: 1px solid #7FA9FF60;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: center;
+  background: rgb(127,169,255);
+  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
 `;
 
 export const embassy = css`
   width: 100%;
+  margin-top: 20px;
   box-sizing: border-box;
   height: 200px;
-  border: 2px solid white;
+  border: 1px solid #7FA9FF60;
+  border-radius: 8px;
+  background: rgb(127,169,255);
+  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
 `;
