@@ -18,13 +18,17 @@ export const TabStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(127, 169, 255, 0.60) ;
+  border: 1px solid rgba(127, 169, 255, 0.6);
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
-  background: rgb(127,169,255);
-  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
-  
+  background: rgb(127, 169, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(127, 169, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.6041010154061625) 60%
+  );
+
   &:hover {
     background: rgba(255, 255, 255, 0.1);
   }
@@ -44,13 +48,17 @@ export const UlStyle = css`
   height: 60%;
   padding: 0px 30px;
   box-sizing: border-box;
-  border: 1px solid #7FA9FF60;
+  border: 1px solid #7fa9ff60;
   border-radius: 8px;
-  background: rgb(127,169,255);
-  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
+  background: rgb(127, 169, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(127, 169, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.6041010154061625) 60%
+  );
   overflow-y: scroll; // 세로 스크롤 활성화
   display: flex;
-  margin-top: 0px; 
+  margin-top: 0px;
   flex-wrap: wrap; // 플렉스 항목이 줄 바꿈
   gap: 12px; // 항목 간 간격
 
@@ -60,14 +68,14 @@ export const UlStyle = css`
   }
 
   &::-webkit-scrollbar-track {
-    background: trasport;       /* 스크롤 트랙 배경 */
-    border-radius: 10px;    /* 둥근 트랙 */
+    background: trasport; /* 스크롤 트랙 배경 */
+    border-radius: 10px; /* 둥근 트랙 */
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: white; /* 스크롤바 색상 */
-    border-radius: 10px;       /* 둥근 스크롤바 */
-    border: 3px solid #222;    /* 스크롤바와 트랙 간 간격 */
+    border-radius: 10px; /* 둥근 스크롤바 */
+    border: 3px solid #222; /* 스크롤바와 트랙 간 간격 */
   }
 
   &::-webkit-scrollbar-thumb:hover {
@@ -87,11 +95,11 @@ export const LiStyle = css`
 `;
 
 export const linkStyle = css`
-  color: white;         /* 기본 색상 */
-  text-decoration: none;  /* 밑줄 제거 */
-  font-size: 16px;    
-  padding: 5px;        
+  color: white; /* 기본 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  font-size: 18px;
+  padding: 5px;
   &:hover {
-    color: #7FA9FF;       /* 호버 시 색상 변경 */
+    color: #7fa9ff; /* 호버 시 색상 변경 */
   }
 `;

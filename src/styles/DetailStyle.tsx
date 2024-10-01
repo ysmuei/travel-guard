@@ -34,11 +34,16 @@ export const contriesName = css`
   height: 180px;
   padding: 0 32px;
   border-radius: 8px;
-  border: 1px solid #7FA9FF60;
+  box-sizing: border-box;
+  border: 1px solid #7fa9ff60;
   gap: 20px;
   margin-bottom: 32px;
-  background: rgb(127,169,255);
-    background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
+  background: rgb(127, 169, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(127, 169, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.6041010154061625) 60%
+  );
 `;
 
 export const detailInfo = css`
@@ -53,8 +58,8 @@ export const localImg = css`
   width: 50%;
   overflow: hidden;
   border-radius: 8px;
-  border: 1px solid #7FA9FF60;
-  background-sizing: contain; 
+  border: 1px solid #7fa9ff60;
+  background-sizing: contain;
 `;
 
 export const textContainer = css`
@@ -67,32 +72,86 @@ export const textContainer = css`
 
 export const newsCon = css`
   flex: 1; /* 50% 높이로 설정 */
-  border: 1px solid #7FA9FF60;
+  border: 1px solid #7fa9ff60;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border-radius: 8px;
-  justify-content: center;
-  background: rgb(127,169,255);
-  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
+  padding: 20px 50px;
+  box-sizing: border-box;
+  background: rgb(127, 169, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(127, 169, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.6041010154061625) 60%
+  );
 `;
+export const newsHeader = css`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-bottom: 3px solid #7fa9ff;
+  padding: 20px;
+`;
+
+export const newsList = css`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-bottom: 2px solid #5e5e5e;
+  padding: 20px;
+`;
+
+export const embassyListStyle = css`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 20px;
+`;
+
 export const embassyCon = css`
   flex: 1; /* 50% 높이로 설정 */
-  border: 1px solid #7FA9FF60;
+  border: 1px solid #7fa9ff60;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  padding: 20px 50px;
   border-radius: 8px;
-  justify-content: center;
-  background: rgb(127,169,255);
-  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
+  background: rgb(127, 169, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(127, 169, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.6041010154061625) 60%
+  );
+`;
+export const embassyHeader = css`
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 3px solid #7fa9ff;
+  padding: 20px;
 `;
 
 export const embassy = css`
   width: 100%;
   margin-top: 20px;
   box-sizing: border-box;
-  height: 200px;
-  border: 1px solid #7FA9FF60;
+  height: auto;
+  padding: 20px;
+  border: 1px solid #7fa9ff60;
   border-radius: 8px;
-  background: rgb(127,169,255);
-  background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
+  background: rgb(127, 169, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(127, 169, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.6041010154061625) 60%
+  );
+`;
+export const embassyListCon = css`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
