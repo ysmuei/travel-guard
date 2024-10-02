@@ -97,10 +97,15 @@ export const newsHeader = css`
 export const newsList = css`
   width: 100%;
   display: flex;
+  cursor: pointer;
   justify-content: space-between;
   box-sizing: border-box;
   border-bottom: 2px solid #5e5e5e;
   padding: 20px;
+  transition: all 0.3s ease;
+  &:hover {
+    scale: 1.05;
+  }
 `;
 
 export const embassyListStyle = css`

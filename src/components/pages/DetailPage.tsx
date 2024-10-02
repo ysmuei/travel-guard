@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query"; // React Query import
 import { useParams } from "react-router-dom";
 import Modal from "../common/Modal.tsx"; // Modal 컴포넌트 import
@@ -26,22 +25,7 @@ import {
   embassyListCon,
   embassyListStyle,
 } from "../../styles/DetailStyle"; // DetailPage 스타일 import
-
-interface CountryData {
-  alarm_lvl: number;
-  continent_cd: string;
-  continent_eng_nm: string;
-  continent_nm: string;
-  country_eng_nm: string;
-  country_iso_alp2: string;
-  country_nm: string;
-  dang_map_download_url: string;
-  flag_download_url: string;
-  map_download_url: string;
-  region_ty: string;
-  remark: string;
-  written_dt: string;
-}
+import { useState } from "react";
 
 interface PermissionData {
   국가: string;
@@ -150,100 +134,135 @@ const DetailPage = () => {
   const embassyList = embassyData; // 대사관 데이터 배열
 
   return (
-    <main css={mainStyle}>
-      <h1 css={h1Style}>국가별 정보</h1>
-      <p css={pStyle}>국가의 상세 내용을 확인.</p>
-      <div css={detailCon}>
-        <section css={contriesName}>
-          <div>
-            {countryData ? (
-              <img
-                style={{ width: "150px" }}
-                src={countryData.data[0]?.flag_download_url}
-                alt="국기 이미지"
-              />
-            ) : (
-              <p>Loading flag...</p>
-            )}
-          </div>
-          <div>
-            <p css={css({ fontSize: "24px" })}>
-              {countryData?.data[0]?.country_nm} (
-              {countryData?.data[0]?.country_eng_nm})
-            </p>
-            <p css={css({ fontSize: "16px" })}>
-              {countryData?.data[0]?.continent_nm}
-            </p>
-          </div>
-        </section>
-        <section css={detailInfo}>
-          <div css={localImg}>
-            {countryData ? (
-              <img
-                style={{ width: "100%", height: "100%" }}
-                src={countryData.data[0]?.dang_map_download_url}
-                alt="국가 이미지"
-              />
-            ) : (
-              <p>Loading flag...</p>
-            )}
-          </div>
-          <div css={textContainer}>
-            <div css={newsCon}>
-              <div css={newsHeader}>
-                <p style={{ fontSize: "24px" }}>안전공지</p>
-              </div>
-              {safetyNewsData?.data?.map((news: any, index: number) => (
-                <div onClick={() => openModal(news)} css={newsList} key={index}>
-                  <p>{news.title}</p>
-                  <p>{news.date}</p>
+    <>
+      <main css={mainStyle}>
+        <h1 css={h1Style}>국가별 정보</h1>
+        <p css={pStyle}>국가의 상세 내용을 확인.</p>
+        <div css={detailCon}>
+          <section css={contriesName}>
+            <div>
+              {countryData ? (
+                <img
+                  style={{ width: "150px" }}
+                  src={countryData.data[0]?.flag_download_url}
+                  alt="국기 이미지"
+                />
+              ) : (
+                <p>Loading flag...</p>
+              )}
+            </div>
+            <div>
+              <p css={css({ fontSize: "24px" })}>
+                {countryData?.data[0]?.country_nm} (
+                {countryData?.data[0]?.country_eng_nm})
+              </p>
+              <p css={css({ fontSize: "16px" })}>
+                {countryData?.data[0]?.continent_nm}
+              </p>
+            </div>
+          </section>
+          <section css={detailInfo}>
+            <div css={localImg}>
+              {countryData ? (
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src={countryData.data[0]?.dang_map_download_url}
+                  alt="국가 이미지"
+                />
+              ) : (
+                <p>Loading flag...</p>
+              )}
+            </div>
+            <div css={textContainer}>
+              <div css={newsCon}>
+                <div css={newsHeader}>
+                  <p style={{ fontSize: "24px" }}>안전공지</p>
                 </div>
-              ))}
-            </div>
-            <div css={embassyCon}>
-              <div css={embassyHeader}>
-                <p style={{ fontSize: "24px" }}>입국요건</p>
+                {safetyNewsData?.data && safetyNewsData.data.length > 0 ? (
+                  safetyNewsData.data.map((news: any, index: number) => (
+                    <div
+                      onClick={() => openModal(news)}
+                      css={newsList}
+                      key={index}
+                    >
+                      <p>{news.title}</p>
+                      <p>{news.date}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p css={embassyListStyle}>데이터가 없습니다.</p>
+                )}
               </div>
-              {permissionData?.data
-                ?.filter(
-                  (permission: PermissionData) =>
-                    permission.국가 === countryData?.data[0]?.country_nm
-                )
-                .map((permission: PermissionData, index: number) => (
-                  <div key={index} css={embassyListStyle}>
-                    <p>국가: {permission.국가}</p>
-                    <p>
-                      입국 가능 기간:{" "}
-                      {permission["일반여권소지자-입국가능기간"]}
-                    </p>
-                    <p>
-                      입국 가능 여부:{" "}
-                      {permission["일반여권소지자-입국가능여부"]}
-                    </p>
-                    <p>입국 시 소지 여부: {permission["입국시 소지여부"]}</p>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </section>
-        <section css={embassy}>
-          <div css={embassyHeader}>
-            <p style={{ fontSize: "24px" }}>대사관 정보</p>
-          </div>
-          {embassyList
-            .filter(
-              (embassy: EmbassyData) => embassy.country_iso_alp2 === countryCode
-            )
-            .map((embassy: EmbassyData, index: number) => (
-              <div key={index} css={embassyListCon}>
-                <p>대사관 이름: {embassy.embassy_kor_nm}</p>
-                <p>주소: {embassy.emblgbd_addr}</p>
-                <p>대표 전화번호: {embassy.tel_no}</p>
-                <p>긴급 전화번호: {embassy.urgency_tel_no}</p>
+              <div css={embassyCon}>
+                <div css={embassyHeader}>
+                  <p style={{ fontSize: "24px" }}>입국요건</p>
+                </div>
+                {permissionData?.data ? (
+                  permissionData.data.filter(
+                    (permission: PermissionData) =>
+                      permission.국가 === countryData?.data[0]?.country_nm
+                  ).length > 0 ? (
+                    permissionData.data
+                      .filter(
+                        (permission: PermissionData) =>
+                          permission.국가 === countryData?.data[0]?.country_nm
+                      )
+                      .map((permission: PermissionData, index: number) => (
+                        <div key={index} css={embassyListStyle}>
+                          <p>국가: {permission.국가}</p>
+                          <p>
+                            입국 가능 기간:{" "}
+                            {permission["일반여권소지자-입국가능기간"]}
+                          </p>
+                          <p>
+                            입국 가능 여부:{" "}
+                            {permission["일반여권소지자-입국가능여부"]}
+                          </p>
+                          <p>
+                            입국 시 소지 여부: {permission["입국시 소지여부"]}
+                          </p>
+                        </div>
+                      ))
+                  ) : (
+                    <p css={embassyListStyle}>데이터가 없습니다.</p>
+                  )
+                ) : (
+                  <p css={embassyListStyle}>데이터가 없습니다.</p>
+                )}
               </div>
-            ))}
-        </section>
-      </div>
+            </div>
+          </section>
+          <section css={embassy}>
+            <div css={embassyHeader}>
+              <p style={{ fontSize: "24px" }}>대사관 정보</p>
+            </div>
+            {embassyList && embassyList.length > 0 ? (
+              embassyList.filter(
+                (embassy: EmbassyData) =>
+                  embassy.country_iso_alp2 === countryCode
+              ).length > 0 ? (
+                embassyList
+                  .filter(
+                    (embassy: EmbassyData) =>
+                      embassy.country_iso_alp2 === countryCode
+                  )
+                  .map((embassy: EmbassyData, index: number) => (
+                    <div key={index} css={embassyListCon}>
+                      <p>대사관 이름: {embassy.embassy_kor_nm}</p>
+                      <p>주소: {embassy.emblgbd_addr}</p>
+                      <p>대표 전화번호: {embassy.tel_no}</p>
+                      <p>긴급 전화번호: {embassy.urgency_tel_no}</p>
+                    </div>
+                  ))
+              ) : (
+                <p css={embassyListStyle}>데이터가 없습니다.</p>
+              )
+            ) : (
+              <p css={embassyListStyle}>데이터가 없습니다.</p>
+            )}
+          </section>
+        </div>
+      </main>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {selectedNotice && (
           <div>
@@ -255,7 +274,7 @@ const DetailPage = () => {
           </div>
         )}
       </Modal>
-    </main>
+    </>
   );
 };
 

@@ -1,18 +1,30 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Globe from "react-globe.gl";
-import { scaleSequentialSqrt } from "d3-scale"; // d3-scale에서 가져옴
-import { interpolateYlOrRd } from "d3-scale-chromatic"; // d3-scale-chromatic에서 가져옴
 import { FeatureCollection, Feature } from "geojson"; // geojson 타입 사용
-
+import { useQuery } from "@tanstack/react-query"; // React Query import
+import { fetchMedicalData, fetchEmbassyData } from "../../api/apis"; // apis.ts 파일에서 API 가져오기
+import WarningLevel from "../common/WarningLevel";
 interface CountryProperties {
   ADMIN: string; // 국가 이름
   ISO_A2: string; // 국가 코드
-  GDP_MD_EST: number; // GDP 데이터
-  POP_EST: number; // 인구 데이터
 }
 
 interface CountryFeature extends Feature {
   properties: CountryProperties;
+}
+
+interface MedicalData {
+  country_nm: string;
+  country_iso_alp2: string;
+  current_travel_alarm: string;
+}
+
+interface EmbassyData {
+  country_iso_alp2?: string;
+  embassy_kor_nm: string;
+  emblgbd_addr: string;
+  tel_no: string;
+  urgency_tel_no: string;
 }
 
 const BannerPage: React.FC = () => {
@@ -22,33 +34,87 @@ const BannerPage: React.FC = () => {
   });
   const [hoverD, setHoverD] = useState<CountryFeature | null>(null);
 
+  // GeoJSON 데이터를 가져오기 위한 useEffect
   useEffect(() => {
-    // 데이터 로드
     fetch("./datasets/countries.geojson")
       .then((res) => res.json())
       .then(setCountries);
   }, []);
 
-  const colorScale = scaleSequentialSqrt(interpolateYlOrRd); // 수정된 부분
+  // React Query를 사용해 Medical API 데이터 가져오기
+  const {
+    data: medicalData,
+    isLoading: isLoadingMedicalData,
+    error: errorMedicalData,
+  } = useQuery({
+    queryKey: ["medicalData"],
+    queryFn: fetchMedicalData,
+    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
+  });
 
-  // GDP per capita 계산 함수
-  const getVal = (feat: CountryFeature) =>
-    feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
+  const {
+    data: embassyData,
+    isLoading: isLoadingEmbassyData,
+    error: errorEmbassyData,
+  } = useQuery({
+    queryKey: ["embassyData"],
+    queryFn: fetchEmbassyData,
+    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
+  });
 
-  const maxVal = useMemo(
-    () =>
-      Math.max(...countries.features.map((d) => getVal(d as CountryFeature))),
-    [countries]
-  );
+  // 경보 단계에 따라 색상을 설정하는 함수
+  const getAlertLevelColor = (alertLevel: string) => {
+    switch (alertLevel) {
+      case "0단계":
+        return "#FFFFFF";
+      case "1단계":
+        return "#2A70FF";
+      case "2단계":
+        return "#00FFA3";
+      case "3단계":
+        return "#FFF738";
+      case "4단계":
+        return "#FF6636";
+      case "5단계":
+        return "#FF07D7";
+      default:
+        return "#FFFFFF"; // 경보 단계가 없을 경우 기본 색상
+    }
+  };
 
-  colorScale.domain([0, maxVal]);
+  // 각 국가의 경보 단계에 따른 색상 매핑
+  const countryColorMapping = useMemo(() => {
+    const mapping: { [key: string]: string } = {};
+    medicalData?.data.forEach((data: MedicalData) => {
+      if (data.current_travel_alarm) {
+        const alertLevel = data.current_travel_alarm.split(":")[0];
+        if (data.country_iso_alp2) {
+          mapping[data.country_iso_alp2.toUpperCase()] =
+            getAlertLevelColor(alertLevel);
+        }
+      }
+    });
+    return mapping;
+  }, [medicalData]);
+
+  // 로딩 상태와 에러 처리
+  if (isLoadingMedicalData || isLoadingEmbassyData) {
+    return <p>Loading...</p>;
+  }
+
+  if (errorMedicalData || errorEmbassyData) {
+    return <p>Error loading data</p>;
+  }
 
   return (
     <div
       style={{
-        width: "1200px",
-        height: `calc(100vh - 200px)`,
-        position: "absolute",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
       }}
     >
       <Globe
@@ -59,22 +125,46 @@ const BannerPage: React.FC = () => {
           (d) => (d as CountryFeature).properties.ISO_A2 !== "AQ"
         )}
         polygonAltitude={(d) => (d === hoverD ? 0.12 : 0.06)}
-        polygonCapColor={(d) =>
-          d === hoverD ? "steelblue" : colorScale(getVal(d as CountryFeature))
-        }
+        polygonCapColor={(d) => {
+          const countryCode = (
+            d as CountryFeature
+          ).properties.ISO_A2.toUpperCase();
+          return d === hoverD
+            ? "steelblue"
+            : countryColorMapping[countryCode] || "#999999";
+        }}
         polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
         polygonStrokeColor={() => "#111"}
         polygonLabel={(d) => {
-          const properties = (d as CountryFeature).properties; // 타입 캐스팅을 통해 properties 확인
+          const properties = (d as CountryFeature).properties;
+
+          // 해당 국가의 대사관 정보 찾기
+          const embassyInfo = embassyData?.find(
+            (embassy: EmbassyData) =>
+              embassy.country_iso_alp2?.toUpperCase() === properties.ISO_A2
+          );
+
           return `
-      <b>${properties.ADMIN} (${properties.ISO_A2}):</b> <br />
-      GDP: <i>${properties.GDP_MD_EST}</i> M$<br/>
-      Population: <i>${properties.POP_EST}</i>
-    `;
+          <div>
+            <b>${properties.ADMIN} (${properties.ISO_A2})</b><br/>
+            ${
+              embassyInfo
+                ? `
+              ${embassyInfo.embassy_kor_nm}<br/>
+              <b>Tel:</b> ${embassyInfo.tel_no}<br/>
+              <b>Emergency Tel:</b> ${embassyInfo.urgency_tel_no}<br/>
+            `
+                : "No embassy information available"
+            }
+          </div>
+          
+           
+          `;
         }}
         onPolygonHover={(d) => setHoverD(d as CountryFeature | null)}
         polygonsTransitionDuration={300}
       />
+      <WarningLevel />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query"; // 최신 버전의 경우 사용
 import { fetchMedicalData } from "../../api/apis.ts"; // API 호출 함수 import
