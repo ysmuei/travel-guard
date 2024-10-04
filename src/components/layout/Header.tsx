@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const headerStyle = css`
   display: flex;
   align-items: center;
-  background-color: ##020010;
+  background-color: #020010;
   padding: 30px 20px;
   position: absolute; /* position을 relative로 설정 */
   top: 0;

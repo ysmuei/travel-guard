@@ -4,6 +4,7 @@ import { FeatureCollection, Feature } from "geojson"; // geojson 타입 사용
 import { useQuery } from "@tanstack/react-query"; // React Query import
 import { fetchMedicalData, fetchEmbassyData } from "../../api/apis"; // apis.ts 파일에서 API 가져오기
 import WarningLevel from "../common/WarningLevel";
+
 interface CountryProperties {
   ADMIN: string; // 국가 이름
   ISO_A2: string; // 국가 코드
@@ -16,7 +17,7 @@ interface CountryFeature extends Feature {
 interface MedicalData {
   country_nm: string;
   country_iso_alp2: string;
-  current_travel_alarm: string;
+  current_travel_alarm: string | null;
 }
 
 interface EmbassyData {
@@ -63,7 +64,10 @@ const BannerPage: React.FC = () => {
   });
 
   // 경보 단계에 따라 색상을 설정하는 함수
-  const getAlertLevelColor = (alertLevel: string) => {
+  const getAlertLevelColor = (alertLevel: string | null) => {
+    if (alertLevel === null) {
+      return "#FFFFFF";
+    }
     switch (alertLevel) {
       case "0단계":
         return "#FFFFFF";
@@ -78,7 +82,7 @@ const BannerPage: React.FC = () => {
       case "5단계":
         return "#FF07D7";
       default:
-        return "#FFFFFF"; // 경보 단계가 없을 경우 기본 색상
+        return "white"; // 경보 단계가 없을 경우 기본 색상
     }
   };
 
@@ -86,12 +90,12 @@ const BannerPage: React.FC = () => {
   const countryColorMapping = useMemo(() => {
     const mapping: { [key: string]: string } = {};
     medicalData?.data.forEach((data: MedicalData) => {
-      if (data.current_travel_alarm) {
-        const alertLevel = data.current_travel_alarm.split(":")[0];
-        if (data.country_iso_alp2) {
-          mapping[data.country_iso_alp2.toUpperCase()] =
-            getAlertLevelColor(alertLevel);
-        }
+      const alertLevel = data.current_travel_alarm
+        ? data.current_travel_alarm.split(":")[0]
+        : null;
+      if (data.country_iso_alp2) {
+        mapping[data.country_iso_alp2.toUpperCase()] =
+          getAlertLevelColor(alertLevel);
       }
     });
     return mapping;
@@ -131,7 +135,7 @@ const BannerPage: React.FC = () => {
           ).properties.ISO_A2.toUpperCase();
           return d === hoverD
             ? "steelblue"
-            : countryColorMapping[countryCode] || "#999999";
+            : countryColorMapping[countryCode] || "white";
         }}
         polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
         polygonStrokeColor={() => "#111"}
@@ -157,8 +161,6 @@ const BannerPage: React.FC = () => {
                 : "No embassy information available"
             }
           </div>
-          
-           
           `;
         }}
         onPolygonHover={(d) => setHoverD(d as CountryFeature | null)}

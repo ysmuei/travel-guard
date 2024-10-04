@@ -14,8 +14,6 @@ export const fetchEmbassyData = async () => {
 
   try {
     const response = await axios.get(BASE_URL);
-    // console.log(response.data.data);
-
     return response.data.data;
   } catch (error) {
     console.error("Error fetchEmbassyData:", error);
@@ -29,7 +27,10 @@ export const fetchMedicalData = async () => {
 
   try {
     const response = await axios.get(BASE_URL);
+    console.log(response.data);
     return response.data;
+    
+    
   } catch (error) {
     console.error("Error fetchMedicalData:", error);
     throw error;
@@ -67,7 +68,6 @@ export const fetchSafetyNoticeData = async (ISO: string) => {
   const BASE_URL = `https://apis.data.go.kr/1262000/CountrySafetyService6/getCountrySafetyList6?serviceKey=${SAFENEWS_API_KEY}&numOfRows=3&cond[country_iso_alp2::EQ]=${ISO}&pageNo=1`;
   try {
     const response = await axios.get(BASE_URL);
-    console.log(response.data, ISO);
     return response.data;
   } catch (error) {
     console.error("Error fetchSafetyNoticeData:", error);

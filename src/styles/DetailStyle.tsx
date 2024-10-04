@@ -5,6 +5,7 @@ export const detailCon = css`
   width: 100%;
   height: 100%;
   margin-top: 30px;
+  padding-bottom: 50px;
   overflow-y: scroll;
   box-sizing: border-box;
 
@@ -51,7 +52,7 @@ export const detailInfo = css`
   width: 100%;
   gap: 20px;
   box-sizing: border-box;
-  height: 90%;
+  height: 100%;
 `;
 
 export const localImg = css`
