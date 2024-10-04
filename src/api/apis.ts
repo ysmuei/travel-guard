@@ -51,7 +51,7 @@ export const fetchNationalData = async (ISO: string) => {
 
 // 입국 허가 데이터를 가져오는 함수
 export const fetchPermissionData = async () => {
-  const BASE_URL = `http://api.odcloud.kr/api/15076574/v1/uddi:b0a4deac-3443-4e7b-bee1-a6163b1dbc17?page=1&perPage=200&returnType=json&serviceKey=${PERMISSON_API_KEY}`;
+  const BASE_URL = `https://api.odcloud.kr/api/15076574/v1/uddi:b0a4deac-3443-4e7b-bee1-a6163b1dbc17?page=1&perPage=200&returnType=json&serviceKey=${PERMISSON_API_KEY}`;
 
   try {
     const response = await axios.get(BASE_URL);
