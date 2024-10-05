@@ -3,8 +3,8 @@ import { css } from "@emotion/react";
 
 const Footer = () => {
   const footerStyle = css`
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
     background-color: #020010;
     width: 100%;
     height: 50px;
@@ -15,7 +15,7 @@ const Footer = () => {
 
   const logoContainerStyle = css`
     display: flex;
-    animation: move 25s linear infinite; // 애니메이션 적용
+    animation: move 60s linear infinite; // 애니메이션 적용
     white-space: nowrap; // 텍스트가 줄 바꿈되지 않도록
     gap: 20px; // 로고 간격
   `;
@@ -51,8 +51,7 @@ const Footer = () => {
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
         <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
-        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
-        <img css={logoStyle} src="./assets/footerLogo.svg" alt="logo" />
+        
       </div>
     </div>
   );

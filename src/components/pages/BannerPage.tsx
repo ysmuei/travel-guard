@@ -66,25 +66,26 @@ const BannerPage: React.FC = () => {
   // 경보 단계에 따라 색상을 설정하는 함수
   const getAlertLevelColor = (alertLevel: string | null) => {
     if (alertLevel === null) {
-      return "#FFFFFF";
+      return "rgba(255, 255, 255, 0.9)"; // 0.4 투명도 적용
     }
     switch (alertLevel) {
       case "0단계":
-        return "#FFFFFF";
+        return "rgba(255, 255, 255, 0.9)"; // 하얀색, 0.4 투명도
       case "1단계":
-        return "#2A70FF";
+        return "rgba(42, 112, 255, 0.9)"; // 파란색, 0.7 투명도
       case "2단계":
-        return "#00FFA3";
+        return "rgba(0, 255, 163, 0.9)"; // 청록색, 0.7 투명도
       case "3단계":
-        return "#FFF738";
+        return "rgba(255, 247, 56, 0.9)"; 
       case "4단계":
-        return "#FF6636";
+        return "rgba(255, 102, 54, 0.9)"; // 빨간색, 1 (불투명)
       case "5단계":
-        return "#FF07D7";
+        return "rgba(255, 7, 215, 0.9)"; // 자홍색, 0.7 투명도
       default:
-        return "white"; // 경보 단계가 없을 경우 기본 색상
+        return "rgba(255, 255, 255, 0.9)"; // 경보 단계가 없을 경우 기본 색상, 0.4 투명도
     }
   };
+  
 
   // 각 국가의 경보 단계에 따른 색상 매핑
   const countryColorMapping = useMemo(() => {
@@ -119,6 +120,7 @@ const BannerPage: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
+        border: "1px solid red"
       }}
     >
       <Globe

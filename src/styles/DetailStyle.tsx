@@ -8,6 +8,8 @@ export const detailCon = css`
   padding-bottom: 50px;
   overflow-y: scroll;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 
   /* 커스텀 스크롤바 */
   &::-webkit-scrollbar {
@@ -33,7 +35,7 @@ export const contriesName = css`
   flex-direction: row;
   align-items: center;
   height: 180px;
-  padding: 0 32px;
+  padding: 20px 32px;
   border-radius: 8px;
   box-sizing: border-box;
   border: 1px solid #7fa9ff60;
@@ -45,6 +47,10 @@ export const contriesName = css`
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+  @media (max-width: 768px) {
+    height: 150px;
+    padding: 10 16px;
+  }
 `;
 
 export const detailInfo = css`
@@ -53,22 +59,37 @@ export const detailInfo = css`
   gap: 20px;
   box-sizing: border-box;
   height: 100%;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const localImg = css`
+  display: flex;
   width: 50%;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid #7fa9ff60;
   background-sizing: contain;
+
+  @media (max-width: 768px) {
+    width: 100%; // 모바일에서는 전체 너비 사용
+    height: auto; // 높이를 자동으로 설정
+  }
 `;
 
 export const textContainer = css`
   display: flex;
   flex-direction: column; /* 위아래로 배치 */
   gap: 20px;
+  box-sizing: border-box;
   width: 50%;
   height: 100%; /* 부모의 전체 높이를 차지 */
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const newsCon = css`
@@ -85,6 +106,9 @@ export const newsCon = css`
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
 `;
 export const newsHeader = css`
   width: 100%;
@@ -93,6 +117,7 @@ export const newsHeader = css`
   box-sizing: border-box;
   border-bottom: 3px solid #7fa9ff;
   padding: 20px;
+  
 `;
 
 export const newsList = css`
@@ -100,12 +125,16 @@ export const newsList = css`
   display: flex;
   cursor: pointer;
   justify-content: space-between;
-  box-sizing: border-box;
   border-bottom: 2px solid #5e5e5e;
   padding: 20px;
+  box-sizing: border-box;
   transition: all 0.3s ease;
   &:hover {
     scale: 1.05;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
   }
 `;
 

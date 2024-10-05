@@ -11,6 +11,7 @@ import {
   UlStyle,
   LiStyle,
   linkStyle,
+  TabLiStyle,
 } from "../../styles/MainPageStyle"; // MainPage 스타일 import
 import { Link } from "react-router-dom";
 
@@ -92,7 +93,7 @@ const MainPage = () => {
           <div
             css={[
               TabStyle,
-              label === "전체" && { flex: "none", width: "80px" },
+              label === "전체" && { flex: "none", width: "80px", paddingLeft: "60px"},
             ]}
             key={label}
             onClick={() => handleTabClick(label)}
@@ -103,14 +104,7 @@ const MainPage = () => {
                 style={{ backgroundColor: getStatusColor(label) }}
               />
             )}
-            <span
-              style={{
-                color: "#F0F0F0",
-                fontSize: 16,
-                fontFamily: "Pretendard Variable",
-                fontWeight: "600",
-              }}
-            >
+            <span css={TabLiStyle}>
               {text}
             </span>
           </div>

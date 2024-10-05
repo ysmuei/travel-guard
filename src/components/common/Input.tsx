@@ -12,6 +12,7 @@ const inputConStyle = css`
   border: 1px solid #7FA9FF50;
   border-radius: 16px; // 모서리 둥글게
   padding-left: 16px;
+
 `;
 const inputStyle = css`
   width: 100%;
@@ -22,6 +23,10 @@ const inputStyle = css`
   outline: none; // 포커스 시 윤곽선 제거
   background-color: transparent; 
   
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+    font-size: 16px; 
+  }
 `;
 
 interface InputProps {

@@ -8,6 +8,27 @@ export const TabContainer = css`
   padding: 10px 0px; // 위아래, 좌우 패딩
   border-radius: 8px;
   gap: 5px; // 탭 간 간격
+  flex-wrap: wrap; // 탭이 줄바꿈되도록 설정
+
+  @media (max-width: 1024px) {
+    flex-wrap: wrap; // 태블릿 크기에서 줄바꿈 설정
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const TabLiStyle = css`
+  color: #f0f0f0;
+  font-size: 16px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-weight: 600;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 12px;
+  }
 `;
 
 // 각 탭 스타일
@@ -32,14 +53,34 @@ export const TabStyle = css`
   &:hover {
     background: rgba(255, 255, 255, 0.1);
   }
+
+  @media (max-width: 1024px) {
+    flex-basis: calc(33.33% - 10px); // 각 줄에 3개씩 배치
+    height: 40px; // 태블릿 크기에서 탭 높이 줄이기
+    font-size: 14px; // 태블릿 크기에서 글자 크기 줄이기
+  }
+
+  @media (max-width: 768px) {
+    flex-basis: calc(33.33% - 10px); // 모바일에서 각 줄에 3개씩 배치
+    height: 40px; // 모바일에서 탭 높이 줄이기
+    font-size: 12px; // 모바일에서 글자 크기 줄이기
+    gap: 5px;
+  }
 `;
 
 // 상태 박스 스타일
 export const StatusBox = css`
   width: 14px;
   height: 14px;
+  flex-shrink: 0; // 고정 크기 유지
   margin-right: 10px;
   border-radius: 2px;
+
+  @media (max-width: 768px) {
+    width: 10px; // 모바일일 때 상태 박스 크기 줄이기
+    height: 10px;
+    margin: 5px;
+  }
 `;
 
 // 스크롤 스타일이 적용된 목록
@@ -68,7 +109,7 @@ export const UlStyle = css`
   }
 
   &::-webkit-scrollbar-track {
-    background: trasport; /* 스크롤 트랙 배경 */
+    background: transparent; /* 스크롤 트랙 배경 */
     border-radius: 10px; /* 둥근 트랙 */
   }
 
@@ -81,6 +122,11 @@ export const UlStyle = css`
   &::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* 호버 시 스크롤바 색상 */
   }
+
+  @media (max-width: 768px) {
+    padding: 0px 0px 0 10px; // 모바일에서 패딩 줄이기
+    height: 57%; // 모바일에서 높이 줄이기
+  }
 `;
 
 export const LiStyle = css`
@@ -92,6 +138,11 @@ export const LiStyle = css`
   padding: 10px;
   color: white; // 글자 색상
   transition: background 0.3s ease; // 배경 색상 변화
+
+  @media (max-width: 768px) {
+    width: 41%;
+    height: auto;
+  }
 `;
 
 export const linkStyle = css`
@@ -99,7 +150,12 @@ export const linkStyle = css`
   text-decoration: none; /* 밑줄 제거 */
   font-size: 18px;
   padding: 5px;
+
   &:hover {
     color: #7fa9ff; /* 호버 시 색상 변경 */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px; // 모바일에서 글씨 크기 줄이기
   }
 `;
