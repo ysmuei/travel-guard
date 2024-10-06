@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useQuery } from "@tanstack/react-query"; // React Query import
+import { useQuery } from "@tanstack/react-query"; 
 import { useParams } from "react-router-dom";
-import Modal from "../common/Modal.tsx"; // Modal 컴포넌트 import
+import Modal from "../common/Modal.tsx"; 
 import {
   fetchNationalData,
   fetchEmbassyData,
   fetchPermissionData,
   fetchSafetyNoticeData,
-} from "../../api/apis.ts"; // API 요청 함수 import
-import { mainStyle, h1Style, pStyle } from "../../styles/TabMainStyle"; // 공통 스타일 import
+} from "../../api/apis.ts";
+import { mainStyle, h1Style, pStyle } from "../../styles/TabMainStyle"; 
 import {
   detailCon,
   contriesName,
@@ -24,7 +24,7 @@ import {
   embassyHeader,
   embassyListCon,
   embassyListStyle,
-} from "../../styles/DetailStyle"; // DetailPage 스타일 import
+} from "../../styles/DetailStyle"; 
 import { useState } from "react";
 
 interface PermissionData {
@@ -62,8 +62,8 @@ const DetailPage = () => {
   } = useQuery({
     queryKey: ["nationalData", countryCode],
     queryFn: () => fetchNationalData(countryCode as string),
-    enabled: !!countryCode, // countryCode가 있을 때만 쿼리 실행
-    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
+    enabled: !!countryCode, 
+    staleTime: 1000 * 60 * 60 * 6, 
   });
 
   // 대사관 정보 가져오기
@@ -74,7 +74,7 @@ const DetailPage = () => {
   } = useQuery({
     queryKey: ["embassyData", countryCode],
     queryFn: fetchEmbassyData,
-    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
+    staleTime: 1000 * 60 * 60 * 6, 
     enabled: !!countryCode,
   });
 
@@ -86,7 +86,6 @@ const DetailPage = () => {
   } = useQuery({
     queryKey: ["permissionData", countryCode],
     queryFn: fetchPermissionData,
-    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
     enabled: !!countryCode,
   });
 

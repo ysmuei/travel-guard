@@ -11,8 +11,8 @@ const warningCon = css`
   border-radius: 8px;
   border: 1px solid #7fa9ff60;
   flex-direction: column;
-  left: 150px;
-  bottom: 150px;
+  left: 5%;
+  bottom: 10%;
   background: rgb(127, 169, 255);
   background: linear-gradient(
     169deg,

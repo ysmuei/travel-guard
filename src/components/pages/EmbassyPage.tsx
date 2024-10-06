@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import Input from "../common/Input";
-import { mainStyle, h1Style, pStyle } from "../../styles/TabMainStyle"; // 공통 스타일 import
+import { mainStyle, h1Style, pStyle } from "../../styles/TabMainStyle"; 
 import {
   listConStyle,
   listHeaderStyle,
   ulStyle,
   listStyle,
-} from "../../styles/PermissonEmbassyStyle"; // EmbassyPage 스타일 import
-import { fetchEmbassyData } from "../../api/apis.ts"; // fetch 함수 import
+} from "../../styles/PermissonEmbassyStyle"; 
+import useDataFetching from "../../hooks/useDataFetching";
+import { fetchEmbassyData } from "../../api/apis"; 
 
 // 대사관 데이터 타입 정의
 interface EmbassyData {
@@ -22,35 +22,30 @@ interface EmbassyData {
 }
 
 const EmbassyPage = () => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  // 필터링 함수 메모이제이션
+  const filterFunction = useMemo(
+    () => (data: any, searchQuery: string) => {
+      return data.filter((item: EmbassyData) =>
+        item.embassy_kor_nm.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    },
+    []
+  );
 
-  // React Query를 이용해 API 데이터를 가져오고 캐시
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["embassyData"], // 쿼리 키
-    queryFn: fetchEmbassyData, // 쿼리 함수
-    staleTime: 1000 * 60 * 60 * 6, // 데이터가 6시간 동안 신선하다고 간주 (6시간)
-    gcTime: 1000 * 60 * 60 * 6, // 데이터가 6시간 동안 캐시에 남아 있음 (6시간)
+  const {
+    data: filteredData,
+    isLoading,
+    error,
+    searchQuery,
+    handleInputChange,
+  } = useDataFetching({
+    queryKey: "embassyData",
+    fetchFunction: fetchEmbassyData,
+    filterFunction,
   });
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error loading data</p>;
-  }
-
-  const embassy = data; // 데이터가 없을 때 빈 배열 처리
-
-  // Input 컴포넌트에서 입력된 값이 변경될 때 호출되는 함수
-  const handleInputChange = (value: string) => {
-    setSearchQuery(value);
-    console.log("검색어:", value);
-  };
-
-  const filteredData = embassy.filter((item: EmbassyData) =>
-    item.embassy_kor_nm.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
 
   return (
     <div css={mainStyle}>

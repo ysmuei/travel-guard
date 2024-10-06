@@ -50,7 +50,7 @@ const BannerPage: React.FC = () => {
   } = useQuery({
     queryKey: ["medicalData"],
     queryFn: fetchMedicalData,
-    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
+    staleTime: 1000 * 60 * 60 * 6, 
   });
 
   const {
@@ -60,29 +60,27 @@ const BannerPage: React.FC = () => {
   } = useQuery({
     queryKey: ["embassyData"],
     queryFn: fetchEmbassyData,
-    staleTime: 1000 * 60 * 60 * 6, // 6시간 동안 신선함 유지
+    staleTime: 1000 * 60 * 60 * 6, 
   });
 
   // 경보 단계에 따라 색상을 설정하는 함수
   const getAlertLevelColor = (alertLevel: string | null) => {
     if (alertLevel === null) {
-      return "rgba(255, 255, 255, 0.9)"; // 0.4 투명도 적용
+      return "rgba(255, 255, 255, 0.9)"; 
     }
     switch (alertLevel) {
       case "0단계":
-        return "rgba(255, 255, 255, 0.9)"; // 하얀색, 0.4 투명도
-      case "1단계":
-        return "rgba(42, 112, 255, 0.9)"; // 파란색, 0.7 투명도
+        return "rgba(255, 255, 255, 0.9)"; 
       case "2단계":
-        return "rgba(0, 255, 163, 0.9)"; // 청록색, 0.7 투명도
+        return "rgba(0, 255, 163, 0.9)"; 
       case "3단계":
         return "rgba(255, 247, 56, 0.9)"; 
       case "4단계":
-        return "rgba(255, 102, 54, 0.9)"; // 빨간색, 1 (불투명)
+        return "rgba(255, 102, 54, 0.9)"; 
       case "5단계":
-        return "rgba(255, 7, 215, 0.9)"; // 자홍색, 0.7 투명도
+        return "rgba(255, 7, 215, 0.9)"; 
       default:
-        return "rgba(255, 255, 255, 0.9)"; // 경보 단계가 없을 경우 기본 색상, 0.4 투명도
+        return "rgba(255, 255, 255, 0.9)"; 
     }
   };
   

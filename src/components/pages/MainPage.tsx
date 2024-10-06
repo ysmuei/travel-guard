@@ -1,84 +1,65 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query"; // 최신 버전의 경우 사용
-import { fetchMedicalData } from "../../api/apis.ts"; // API 호출 함수 import
-import Input from "../common/Input";
-import { mainStyle, h1Style, pStyle } from "../../styles/TabMainStyle"; // 공통 스타일 import
-import {
-  TabContainer,
-  TabStyle,
-  StatusBox,
-  UlStyle,
-  LiStyle,
-  linkStyle,
-  TabLiStyle,
-} from "../../styles/MainPageStyle"; // MainPage 스타일 import
-import { Link } from "react-router-dom";
+import { css } from "@emotion/react";
+import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import Input from '../common/Input';
+import { mainStyle, h1Style, pStyle } from '../../styles/TabMainStyle';
+import { TabContainer, TabStyle, StatusBox, UlStyle, LiStyle, linkStyle, TabLiStyle } from '../../styles/MainPageStyle';
+import useDataFetching from '../../hooks/useDataFetching';
+import { fetchMedicalData } from '../../api/apis';
+import { useState } from 'react';
 
-// Country 타입 정의
 interface Country {
-  clean_water_use_rate: number;
-  clean_water_use_rate_year: number;
+  country_nm: string;
   country_eng_nm: string;
   country_iso_alp2: string;
-  country_nm: string;
   current_travel_alarm: string;
-  tuber_pr_hndrd_thsnd_ppl_outbreak_rate: number;
-  tuber_pr_hndrd_thsnd_ppl_outbreak_rate_year: number;
-}
-
-// 응답 타입 정의
-interface MedicalResponse {
-  currentCount: number;
-  data: Country[];
 }
 
 const MainPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTab, setSelectedTab] = useState("전체");
+  const [selectedTab, setSelectedTab] = useState('전체');
 
-  // React Query를 사용해 데이터 가져오기
-  const { data, isLoading, error } = useQuery<MedicalResponse, Error>({
-    queryKey: ["medicalData"], // 쿼리 키
-    queryFn: fetchMedicalData, // 쿼리 함수
-    staleTime: 1000 * 60 * 60 * 6, // 데이터가 6시간 동안 신선하다고 간주 (6시간)
-    gcTime: 1000 * 60 * 60 * 6, // 데이터가 6시간 동안 캐시에 남아 있음 (6시간)
+  const filterFunction = useMemo(() => (data: any, searchQuery: string) => {
+    return data.data.filter((country: Country) => {
+      const matchesSearch =
+        country.country_nm.includes(searchQuery) ||
+        country.country_eng_nm.includes(searchQuery);
+      const travelStatus = country.current_travel_alarm?.split(':')[0] || '0단계';
+      const matchesTab = selectedTab === '전체' || travelStatus === selectedTab;
+      return matchesTab && matchesSearch;
+    });
+  }, [selectedTab]);
+
+  const { data: filteredCountries, isLoading, error, searchQuery, handleInputChange } = useDataFetching({
+    queryKey: 'medicalData',
+    fetchFunction: fetchMedicalData,
+    filterFunction,
   });
 
-  const countriesData = data?.data || [];
+  const getStatusColor = useMemo(() => (status: string) => {
+    switch (status) {
+      case '0단계': return '#FFFFFF';
+      case '1단계': return '#2A70FF';
+      case '2단계': return '#00FFA3';
+      case '3단계': return '#FFF738';
+      case '4단계': return '#FF6636';
+      case '5단계': return '#FF07D7';
+      default: return '#FFFFFF';
+    }
+  }, []);
 
-  // 검색어 입력 변경 처리
-  const handleInputChange = (value: string) => {
-    setSearchQuery(value);
-  };
-
-  // 탭 클릭 시 처리
   const handleTabClick = (status: string) => {
     setSelectedTab(status);
-    setSearchQuery("");
+    handleInputChange(""); // 탭 클릭 시 검색어 초기화
   };
 
-  // 필터링된 국가 데이터
-  const filteredCountries = countriesData.filter((country: Country) => {
-    const travelStatus = country.current_travel_alarm?.split(":")[0] || "0단계";
-    const matchesTab = selectedTab === "전체" || travelStatus === selectedTab;
-    const matchesSearch =
-      country.country_nm.includes(searchQuery) ||
-      country.country_eng_nm.includes(searchQuery);
-    return matchesTab && matchesSearch;
-  });
-
-  // 로딩 상태 및 오류 처리
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div css={mainStyle}>
       <h1 css={h1Style}>국가/지역별 정보</h1>
-      <p css={pStyle}>
-        국가/지역별 현지 연락처, 사건 사고정보, 문화 등 다양한 정보를
-        제공합니다.
-      </p>
+      <p css={pStyle}>국가/지역별 현지 연락처, 사건 사고정보, 문화 등 다양한 정보를 제공합니다.</p>
       <Input value={searchQuery} onInputChange={handleInputChange} />
       <div css={TabContainer}>
         {[
@@ -104,22 +85,16 @@ const MainPage = () => {
                 style={{ backgroundColor: getStatusColor(label) }}
               />
             )}
-            <span css={TabLiStyle}>
-              {text}
-            </span>
+            <span css={TabLiStyle}>{text}</span>
           </div>
         ))}
       </div>
       <ul css={UlStyle}>
         {filteredCountries.map((country: Country) => {
-          const travelStatus =
-            country.current_travel_alarm?.split(":")[0] || "0단계";
+          const travelStatus = country.current_travel_alarm?.split(':')[0] || '0단계';
           return (
             <li css={LiStyle} key={country.country_iso_alp2}>
-              <div
-                css={StatusBox}
-                style={{ backgroundColor: getStatusColor(travelStatus) }}
-              />
+              <div css={StatusBox} style={{ backgroundColor: getStatusColor(travelStatus) }} />
               <Link to={`/details/${country.country_iso_alp2}`} css={linkStyle}>
                 {country.country_nm}
               </Link>
@@ -129,26 +104,6 @@ const MainPage = () => {
       </ul>
     </div>
   );
-};
-
-// 여행 상태에 따른 색상 반환 함수
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "0단계":
-      return "#FFFFFF";
-    case "1단계":
-      return "#2A70FF";
-    case "2단계":
-      return "#00FFA3";
-    case "3단계":
-      return "#FFF738";
-    case "4단계":
-      return "#FF6636";
-    case "5단계":
-      return "#FF07D7";
-    default:
-      return "#FFFFFF";
-  }
 };
 
 export default MainPage;
