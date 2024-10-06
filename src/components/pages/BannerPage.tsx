@@ -120,7 +120,6 @@ const BannerPage: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        border: "1px solid red"
       }}
     >
       <Globe
@@ -132,9 +131,7 @@ const BannerPage: React.FC = () => {
         )}
         polygonAltitude={(d) => (d === hoverD ? 0.12 : 0.06)}
         polygonCapColor={(d) => {
-          const countryCode = (
-            d as CountryFeature
-          ).properties.ISO_A2.toUpperCase();
+          const countryCode = (d as CountryFeature).properties.ISO_A2.toUpperCase();
           return d === hoverD
             ? "steelblue"
             : countryColorMapping[countryCode] || "white";
@@ -143,31 +140,36 @@ const BannerPage: React.FC = () => {
         polygonStrokeColor={() => "#111"}
         polygonLabel={(d) => {
           const properties = (d as CountryFeature).properties;
-
-          // 해당 국가의 대사관 정보 찾기
           const embassyInfo = embassyData?.find(
             (embassy: EmbassyData) =>
               embassy.country_iso_alp2?.toUpperCase() === properties.ISO_A2
           );
 
           return `
-          <div>
-            <b>${properties.ADMIN} (${properties.ISO_A2})</b><br/>
-            ${
-              embassyInfo
-                ? `
-              ${embassyInfo.embassy_kor_nm}<br/>
-              <b>Tel:</b> ${embassyInfo.tel_no}<br/>
-              <b>Emergency Tel:</b> ${embassyInfo.urgency_tel_no}<br/>
-            `
-                : "No embassy information available"
-            }
-          </div>
+            <div style="background-color: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 8px;">
+              <b>${properties.ADMIN} (${properties.ISO_A2})</b><br/>
+              ${
+                embassyInfo
+                  ? `
+                    ${embassyInfo.embassy_kor_nm}<br/>
+                    <b>전화:</b> ${embassyInfo.tel_no}<br/>
+                    <b>긴급 전화:</b> ${embassyInfo.urgency_tel_no}<br/>
+                  `
+                  : "정보가 없습니다."
+              }
+            </div>
           `;
         }}
         onPolygonHover={(d) => setHoverD(d as CountryFeature | null)}
+        onPolygonClick={(d) => {
+          const properties = (d as CountryFeature).properties;
+          const countryCode = properties.ISO_A2.toUpperCase();
+          // 상세 페이지로 이동
+          window.location.href = `/details/${countryCode}`;
+        }}
         polygonsTransitionDuration={300}
       />
+
       <WarningLevel />
     </div>
   );

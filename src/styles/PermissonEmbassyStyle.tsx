@@ -13,6 +13,10 @@ export const listConStyle = css`
     background: rgb(127,169,255);
     background: linear-gradient(169deg, rgba(127,169,255,0.2) 0%, rgba(0,0,0,0.6041010154061625) 60%);
     
+    @media (max-width: 768px) {
+      font-size: 12px;
+      height: 85%;
+    }
 `;
 
 export const listHeaderStyle = css`

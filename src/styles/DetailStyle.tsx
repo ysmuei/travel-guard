@@ -10,6 +10,7 @@ export const detailCon = css`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  gap: 20px; // 각 섹션 간 간격 추가
 
   /* 커스텀 스크롤바 */
   &::-webkit-scrollbar {
@@ -47,9 +48,12 @@ export const contriesName = css`
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+
   @media (max-width: 768px) {
-    height: 150px;
-    padding: 10 16px;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
   }
 `;
 
@@ -58,10 +62,10 @@ export const detailInfo = css`
   width: 100%;
   gap: 20px;
   box-sizing: border-box;
-  height: 100%;
+  height: auto;
 
   @media (max-width: 768px) {
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 `;
 
@@ -71,11 +75,13 @@ export const localImg = css`
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid #7fa9ff60;
-  background-sizing: contain;
+  background-size: contain;
 
   @media (max-width: 768px) {
-    width: 100%; // 모바일에서는 전체 너비 사용
-    height: auto; // 높이를 자동으로 설정
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    margin-bottom: 20px;
   }
 `;
 
@@ -85,7 +91,6 @@ export const textContainer = css`
   gap: 20px;
   box-sizing: border-box;
   width: 50%;
-  height: 100%; /* 부모의 전체 높이를 차지 */
 
   @media (max-width: 768px) {
     width: 100%;
@@ -93,7 +98,7 @@ export const textContainer = css`
 `;
 
 export const newsCon = css`
-  flex: 1; /* 50% 높이로 설정 */
+  flex: 1;
   border: 1px solid #7fa9ff60;
   display: flex;
   flex-direction: column;
@@ -106,10 +111,13 @@ export const newsCon = css`
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+
   @media (max-width: 768px) {
-    padding: 0px;
+    padding: 20px;
+    margin-bottom: 20px; // 섹션 간 간격 추가
   }
 `;
+
 export const newsHeader = css`
   width: 100%;
   display: flex;
@@ -117,7 +125,6 @@ export const newsHeader = css`
   box-sizing: border-box;
   border-bottom: 3px solid #7fa9ff;
   padding: 20px;
-  
 `;
 
 export const newsList = css`
@@ -130,7 +137,7 @@ export const newsList = css`
   box-sizing: border-box;
   transition: all 0.3s ease;
   &:hover {
-    scale: 1.05;
+    transform: scale(1.05);
   }
 
   @media (max-width: 768px) {
@@ -145,22 +152,33 @@ export const embassyListStyle = css`
   gap: 20px;
   box-sizing: border-box;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 export const embassyCon = css`
-  flex: 1; /* 50% 높이로 설정 */
+  flex: 1;
   border: 1px solid #7fa9ff60;
   display: flex;
   flex-direction: column;
   padding: 20px 50px;
   border-radius: 8px;
+  box-sizing: border-box;
   background: rgb(127, 169, 255);
   background: linear-gradient(
     169deg,
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
 `;
+
 export const embassyHeader = css`
   width: 100%;
   display: flex;
@@ -183,10 +201,20 @@ export const embassy = css`
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
+
 export const embassyListCon = css`
   padding: 20px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;

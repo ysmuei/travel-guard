@@ -93,7 +93,7 @@ const MainPage = () => {
           <div
             css={[
               TabStyle,
-              label === "전체" && { flex: "none", width: "80px", paddingLeft: "60px"},
+              label === "전체" && { flex: "none", width: "80px", paddingLeft: "0px"},
             ]}
             key={label}
             onClick={() => handleTabClick(label)}

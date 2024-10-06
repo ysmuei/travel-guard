@@ -19,6 +19,14 @@ const warningCon = css`
     rgba(127, 169, 255, 0.2) 0%,
     rgba(0, 0, 0, 0.6041010154061625) 60%
   );
+
+  @media (max-width: 768px) {
+    left: 30px;
+    bottom: 70px;
+    font-size: 12px;
+    padding: 0 10px;
+    gap: 0px;
+  }
 `;
 
 const statusCon = css`

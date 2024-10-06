@@ -21,7 +21,7 @@ export const TabContainer = css`
 
 export const TabLiStyle = css`
   color: #f0f0f0;
-  font-size: 16px;
+  font-size: 15px;
   font-family: "Pretendard Variable", sans-serif;
   font-weight: 600;
 
