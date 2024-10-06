@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../common/Input';
