@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { useState, useEffect } from "react";
 import Input from "../common/Input";
 import { mainStyle, h1Style, pStyle } from "../../styles/TabMainStyle"; // 공통 스타일 import
-import { listConStyle, listHeaderStyle, listHeader2Style, ulStyle, listStyle } from "../../styles/PermissonEmbassyStyle"; // PermissonPage 스타일 import
+import { listConStyle, listHeaderStyle, ulStyle, listStyle } from "../../styles/PermissonEmbassyStyle"; // PermissonPage 스타일 import
 import { fetchPermissionData } from "../../api/apis"; // fetch 함수 import
 
 // 입국 허가 요건 데이터 타입 정의
