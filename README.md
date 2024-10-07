@@ -28,6 +28,39 @@ Travel Guard는 전 세계의 여행자들에게 각 국가의 안전 정보를 
 - **src/api**: 서버와의 통신을 위한 API 호출 함수들이 위치해 있습니다.
 - **src/hooks**: 반복되는 데이터 페칭 로직을 커스텀 훅으로 관리합니다.
 - **src/styles**: Emotion을 사용하여 작성된 스타일 파일들이 위치한 폴더입니다.
+  
+  📦src
+ ┣ 📂hooks
+ ┃ ┗ 📜useDataFetching.tsx
+ ┣ 📂api
+ ┃ ┗ 📜apis.ts
+ ┣ 📂components
+ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📜ErrorBoundary.tsx
+ ┃ ┃ ┣ 📜Input.tsx
+ ┃ ┃ ┣ 📜Loader.tsx
+ ┃ ┃ ┣ 📜Modal.tsx
+ ┃ ┃ ┣ 📜Skeleton.tsx
+ ┃ ┃ ┗ 📜WarningLevel.tsx
+ ┃ ┣ 📂layout
+ ┃ ┃ ┣ 📜Footer.tsx
+ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┗ 📂pages
+ ┃ ┃ ┣ 📜BannerPage.tsx
+ ┃ ┃ ┣ 📜DetailPage.tsx
+ ┃ ┃ ┣ 📜EmbassyPage.tsx
+ ┃ ┃ ┣ 📜MainPage.tsx
+ ┃ ┃ ┗ 📜PermissonPage.tsx
+ ┣ 📂stores
+ ┣ 📂styles
+ ┃ ┣ 📜DetailStyle.tsx
+ ┃ ┣ 📜GlobalStyle.tsx
+ ┃ ┣ 📜MainPageStyle.tsx
+ ┃ ┣ 📜PermissonEmbassyStyle.tsx
+ ┃ ┗ 📜TabMainStyle.tsx
+ ┣ 📜App.tsx
+ ┣ 📜main.tsx
+ ┗ 📜vite-env.d.ts
 
 ## 주요 페이지 설명
 1. **메인 페이지 (MainPage)**: 국가별로 여행 경보 상태를 검색 및 필터링할 수 있는 페이지입니다.
