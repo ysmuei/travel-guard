@@ -34,8 +34,13 @@ Travel Guard는 전 세계의 여행자들에게 각 국가의 안전 정보를 
 
 
 
-![GIFMaker_me (2)](https://github.com/user-attachments/assets/34330e23-e6d1-4ab7-b13e-79afab547bdf)
+| ![이미지 1](https://github.com/user-attachments/assets/34330e23-e6d1-4ab7-b13e-79afab547bdf) | ![이미지 2](https://example.com/image2.png) |
+| --- | --- |
+| **메인페이지** | **이미지 2 설명** |
 
+| ![이미지 3](https://example.com/image3.png) | ![이미지 4](https://example.com/image4.png) |
+| --- | --- |
+| **이미지 3 설명** | **이미지 4 설명** |
 
 
 
